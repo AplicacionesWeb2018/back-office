@@ -1,0 +1,24 @@
+{
+  "name": "back-office",
+  "version": "1.0.0",
+  "description": "Back-office for web development final project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AplicacionesWeb2018/back-office.git"
+  },
+  "author": "KOTASEK",
+  "license": "ITESM-CEM",
+  "bugs": {
+    "url": "https://github.com/AplicacionesWeb2018/back-office/issues"
+  },
+  "homepage": "https://github.com/AplicacionesWeb2018/back-office#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
