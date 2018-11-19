@@ -2,6 +2,12 @@ const dbConnection = require('../../config/dbConnection');
 
 module.exports = app => {
   const connection = dbConnection();
+  console.log("CONNECTED");
+
+  connection.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+  });
   
   app.get('/', (req,res) => {
     connection.query('SELECT * FROM products', (err, result) => {

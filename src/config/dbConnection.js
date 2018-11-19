@@ -7,4 +7,4 @@ module.exports = () => {
     password: "Temporal00",
     database : 'apemktco_aplicacionesweb'
   })
-}
+};
