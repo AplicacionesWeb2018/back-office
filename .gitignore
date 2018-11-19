@@ -1,3 +1,2 @@
 /node_modules/
-/js/db/
-/js/fb/
+/src/config/dbConnection.js

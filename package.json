@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node-sass --include-path scss scss/main.scss css/main.css && node index.js",
-    "build-css": "node-sass --include-path scss scss/main.scss css/main.css",
+    "start": "node src/index.js",
+    "build-css": "node-sass --include-path scss scss/main.scss src/app/css/main.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },
   "repository": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/AplicacionesWeb2018/back-office#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
