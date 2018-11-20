@@ -1,4 +1,5 @@
 const dbConnection = require('../../config/dbConnection');
+const mysql = require('mysql');
 
 module.exports = app => {
   const connection = dbConnection();
@@ -15,7 +16,8 @@ module.exports = app => {
         console.log('error when connecting to db:', err);
         setTimeout(handleDisconnect, 2000); 
       }                                     
-    });   */                                  
+    });   */    
+    const connection = dbConnection();                             
     connection.on('error', function(err) {
       console.log('db error', err);
       if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
@@ -30,11 +32,13 @@ module.exports = app => {
   
   app.get('/', (req,res) => {
     connection.query('SELECT * FROM products', (err, result) => {
+      setInterval(function () {
+        connection.query('SELECT 1');
+      }, 5000);
       res.render('pages/products', {
         products: result
       });
     });
-    connection.release();
   });
 
   app.post('/products', (req,res) => {
@@ -48,6 +52,5 @@ module.exports = app => {
     }, (err, result) => {
       res.redirect('/');
     });
-    connection.release();
   });
 };
