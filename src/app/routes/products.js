@@ -37,10 +37,13 @@ module.exports = app => {
   });
 
   app.post('/products', (req,res) => {
-    const { name, description } = req.body;
+    const { name, price, description, category, status } = req.body;
     connection.query('INSERT INTO products SET?', {
       name,
-      description
+      price,
+      description,
+      category,
+      status
     }, (err, result) => {
       res.redirect('/');
     });
