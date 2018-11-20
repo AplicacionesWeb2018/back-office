@@ -21,6 +21,8 @@
   "homepage": "https://github.com/AplicacionesWeb2018/back-office#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "datatables.net": "^1.10.19",
+    "datatables.net-dt": "^1.10.19",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
