@@ -30,7 +30,7 @@ module.exports = app => {
   
   app.get('/', (req,res) => {
     connection.query('SELECT * FROM products', (err, result) => {
-      res.render('products/products', {
+      res.render('pages/products', {
         products: result
       });
     });
