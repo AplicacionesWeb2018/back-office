@@ -34,6 +34,7 @@ module.exports = app => {
         products: result
       });
     });
+    connection.release();
   });
 
   app.post('/products', (req,res) => {
@@ -47,5 +48,6 @@ module.exports = app => {
     }, (err, result) => {
       res.redirect('/');
     });
+    connection.release();
   });
 };
