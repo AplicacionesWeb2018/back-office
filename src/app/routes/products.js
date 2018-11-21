@@ -53,4 +53,10 @@ module.exports = app => {
       res.redirect('/');
     });
   });
+
+  app.post('/cleartable', (req,res) => {
+    connection.query('DELETE FROM products', (err, result) => {
+      res.redirect('/');
+    });
+  });
 };
