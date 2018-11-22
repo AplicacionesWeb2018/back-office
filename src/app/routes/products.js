@@ -1,5 +1,6 @@
 const dbConnection = require('../../config/dbConnection');
 const mysql = require('mysql');
+let mailer = require('../js/mailer');
 
 module.exports = app => {
   const connection = dbConnection();
@@ -55,8 +56,12 @@ module.exports = app => {
   });
 
   app.post('/cleartable', (req,res) => {
+    mailer.connect();
+    mailer.sendMail();
+    connection.query('ALTER TABLE products AUTO_INCREMENT = 1');
     connection.query('DELETE FROM products', (err, result) => {
       res.redirect('/');
     });
+    
   });
 };

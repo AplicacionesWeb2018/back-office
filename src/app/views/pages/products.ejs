@@ -19,6 +19,7 @@
         <table id="productstable" class="table table-striped display">
           <thead>
             <tr>
+              <th>#</th>
               <th>Name</th>
               <th>Price</th>
               <th>Description</th>
@@ -29,6 +30,7 @@
           <tbody>
             <% for(var i = 0; i < products.length; i++){ %>
               <tr>
+                <td> <%= products[i].id_products %></td>
                 <td> <%= products[i].name %></td>
                 <td> <%= products[i].price %></td>
                 <td> <%= products[i].description %></td>    
@@ -78,17 +80,15 @@
       </div>
     </div>
   </div>
-  <script>
-    document.getElementById('title').focus();
-  </script>
   <script type="text/javascript">
+    document.getElementById('title').focus();
     $(document).ready(function() {
     $('#productstable').dataTable( {
         select: {
             style: 'multi'
         }
+      } );
     } );
-} );
   </script>
 </body>
 </html>
