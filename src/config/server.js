@@ -11,6 +11,6 @@ app.set('views', path.join(__dirname, '../app/views'));
 
 // middleware
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(__dirname + '../app/public/'));
+app.use(express.static(__dirname + '/public'));
 
 module.exports = app;
