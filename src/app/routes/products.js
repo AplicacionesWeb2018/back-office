@@ -2,6 +2,9 @@ const dbConnection = require('../../config/dbConnection');
 const mysql = require('mysql');
 let mailer = require('../js/mailer');
 
+let sqlupdate = 'UPDATE products SET status = ? WHERE id_products = ?';
+let sqldelete = 'DELETE FROM products WHERE id_products = ?';
+
 module.exports = app => {
   const connection = dbConnection();
   console.log("CONNECTED");
@@ -55,10 +58,32 @@ module.exports = app => {
     });
   });
 
+  app.post('/productsedit', (req,res) => {
+    let data = [req.body.status, req.body.id_products];
+    connection.query(sqlupdate, data, (error, results, fields) => {
+      if (error){
+        return console.error(error.message);
+      }
+      console.log('Rows affected:', results.affectedRows, data);
+      res.redirect('/');
+    });
+  });
+
+  app.post('/productsdelete', (req,res) => {
+    let data = [req.body.id_products];
+    connection.query(sqldelete, data, (error, results, fields) => {
+      if (error){
+        return console.error(error.message);
+      }
+      console.log('Rows affected:', results.affectedRows, data);
+      res.redirect('/');
+    });
+  });
+
   app.post('/cleartable', (req,res) => {
     mailer.connect();
     mailer.sendMail();
-    connection.query('ALTER TABLE products AUTO_INCREMENT = 1');
+    connection.query('TRUNCATE TABLE products');
     connection.query('DELETE FROM products', (err, result) => {
       res.redirect('/');
     });

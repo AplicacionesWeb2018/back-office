@@ -32,7 +32,7 @@
               <tr>
                 <td> <%= products[i].id_products %></td>
                 <td> <%= products[i].name %></td>
-                <td> <%= products[i].price %></td>
+                <td> $<%= products[i].price %></td>
                 <td> <%= products[i].description %></td>    
                 <td> <%= products[i].category %></td>              
                 <td> <%= products[i].status %></td>              
@@ -54,9 +54,6 @@
           <div class="form-group">
             <input type="text" name="description" class="form-control" placeholder="Description">
           </div>
-          <!-- <div class="form-group">
-            <input type="text" name="category" class="form-control" placeholder="Category">
-          </div> -->
           <hr>
           <h4>Category</h4>
           <select name="category">
@@ -65,9 +62,6 @@
               <option value="shoes">Shoes</option>
               <option value="apparel">Apparel</option>
             </select>
-          <!-- <div class="form-group">
-            <input type="text" name="status" class="form-control" placeholder="Availability (YES/NO)">
-          </div> -->
           <hr>
           <div class="form-group">
             <h4>Availability</h4>
@@ -75,7 +69,21 @@
             <input type="radio" name="status" value="Out of stock"> Out of stock<br>
           </div>
           <input type="submit" value="Add new item" class="btn btn-primary">
+        </form>
+        <form action="/productsedit" method="POST" class="card-body">
+          <h3 class="card-title">Edit a product</h3>
+          <div class="form-group">
+            <input type="text" name="id_products" class="form-control" placeholder="Type the ID of the product to edit">
+          </div>
+          <div class="form-group">
+              <h4>Availability</h4>
+              <input type="radio" name="status" value="Stock"> Stock<br>
+              <input type="radio" name="status" value="Out of stock"> Out of stock<br>
+          </div>
+          <input type="submit" value="Edit" class="btn btn-dark">
+          <input type="submit" value="Delete product" class="btn btn-danger" formaction="/productsdelete">
           <input type="submit" value="DELETE TABLE" class="btn btn-danger" formaction="/cleartable">
+          <br>
         </form>
       </div>
     </div>

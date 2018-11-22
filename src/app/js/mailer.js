@@ -29,7 +29,7 @@ mailer.sendMail = function(){
         (error, info) => {
             if (error)
                 console.log(error);
-            console.log(info.messageId);
+            console.log("ALERT SENT");
         }
     );
 }
