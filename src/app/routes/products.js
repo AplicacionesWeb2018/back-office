@@ -51,7 +51,7 @@ module.exports = app => {
         url = kidsurl
         break;
       default:
-        url = error
+        url = 'error'
     }
     connection.query('INSERT INTO products SET?', {
       name,
