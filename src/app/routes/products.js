@@ -1,26 +1,18 @@
 const dbConnection = require('../../config/dbConnection');
-const mysql = require('mysql');
 let mailer = require('../js/mailer');
 
 let sqlupdate = 'UPDATE products SET status = ? WHERE id_products = ?';
 let sqldelete = 'DELETE FROM products WHERE id_products = ?';
+let womenurl = 'https://www.dealsshutter.com/blog/wp-content/uploads/2018/05/womens-fashion-clothes-catalogs.jpg';
+let menurl = 'https://fashionstanew.files.wordpress.com/2016/11/mens-clothing.jpg';
+let kidsurl = 'https://techcrunch.com/wp-content/uploads/2016/07/14_lifestyle_dbl_roa_038.jpg?w=730&crop=1';
+var url = 'placeholder';
 
 module.exports = app => {
   const connection = dbConnection();
   console.log("CONNECTED");
 
-  /* connection.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-  }); */
-
-  function handleDisconnect() {  
-    /* connection.connect(function(err) {            
-      if(err) {                                    
-        console.log('error when connecting to db:', err);
-        setTimeout(handleDisconnect, 2000); 
-      }                                     
-    });   */    
+  function handleDisconnect() {    
     const connection = dbConnection();                             
     connection.on('error', function(err) {
       console.log('db error', err);
@@ -47,14 +39,30 @@ module.exports = app => {
 
   app.post('/products', (req,res) => {
     const { name, price, description, category, status } = req.body;
+    let cat = req.body.category;
+    switch (cat) {
+      case 'women':
+        url = womenurl
+        break;
+      case 'men':
+        url = menurl
+        break;
+      case 'kids':
+        url = kidsurl
+        break;
+      default:
+        url = error
+    }
     connection.query('INSERT INTO products SET?', {
       name,
       price,
       description,
       category,
-      status
+      status,
+      url
     }, (err, result) => {
       res.redirect('/');
+      console.log(cat);
     });
   });
 
