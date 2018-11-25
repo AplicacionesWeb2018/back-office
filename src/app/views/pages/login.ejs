@@ -18,5 +18,9 @@
   <form action="/products" method="POST" class="card-body text-center">
     <input type="submit" value="Login" class="btn btn-primary">
   </form>
+  <div class="card-body text-center">
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>  
+  </div>
 </body>
 </html>
