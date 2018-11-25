@@ -26,7 +26,7 @@ module.exports = app => {
   
   handleDisconnect();
   
-  app.get('/', (req,res) => {
+  app.post('/products', (req,res) => {
     connection.query('SELECT * FROM products', (err, result) => {
       setInterval(function () {
         connection.query('SELECT 1');
@@ -35,6 +35,10 @@ module.exports = app => {
         products: result
       });
     });
+  });
+
+  app.get('/', (req,res) => {
+    res.render('pages/login')
   });
 
   app.post('/products', (req,res) => {
