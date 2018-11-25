@@ -26,7 +26,7 @@ module.exports = app => {
   
   handleDisconnect();
   
-  app.post('/products', (req,res) => {
+  app.get('/products', (req,res) => {
     connection.query('SELECT * FROM products', (err, result) => {
       setInterval(function () {
         connection.query('SELECT 1');
@@ -44,19 +44,25 @@ module.exports = app => {
   app.post('/products', (req,res) => {
     const { name, price, description, category, status } = req.body;
     let cat = req.body.category;
-    switch (cat) {
-      case 'women':
-        url = womenurl
-        break;
-      case 'men':
-        url = menurl
-        break;
-      case 'kids':
-        url = kidsurl
-        break;
-      default:
-        url = 'error'
+    let urltemp = req.body.url;
+    if (urltemp==''){
+      switch (cat) {
+        case 'women':
+          url = womenurl
+          break;
+        case 'men':
+          url = menurl
+          break;
+        case 'kids':
+          url = kidsurl
+          break;
+        default:
+          url = 'error'
+      } 
+    } else {
+      url = urltemp;
     }
+    
     connection.query('INSERT INTO products SET?', {
       name,
       price,
@@ -65,7 +71,7 @@ module.exports = app => {
       status,
       url
     }, (err, result) => {
-      res.redirect('/');
+      res.redirect('/products');
       console.log(cat);
     });
   });
@@ -77,7 +83,7 @@ module.exports = app => {
         return console.error(error.message);
       }
       console.log('Rows affected:', results.affectedRows, data);
-      res.redirect('/');
+      res.redirect('/products');
     });
   });
 
@@ -88,7 +94,7 @@ module.exports = app => {
         return console.error(error.message);
       }
       console.log('Rows affected:', results.affectedRows, data);
-      res.redirect('/');
+      res.redirect('/products');
     });
   });
 
@@ -97,7 +103,7 @@ module.exports = app => {
     mailer.sendMail();
     connection.query('TRUNCATE TABLE products');
     connection.query('DELETE FROM products', (err, result) => {
-      res.redirect('/');
+      res.redirect('/products');
     });
     
   });
